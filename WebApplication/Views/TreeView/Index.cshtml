@@ -1,0 +1,83 @@
+﻿@model List<WebApplication.Model.Issue>
+
+@{
+    ViewBag.Title = "GridView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Head {
+    @Html.DevExpress().GetStyleSheets(
+    new StyleSheet { ExtensionSuite = ExtensionSuite.TreeList }
+)
+    @Html.DevExpress().GetScripts(
+            new Script { ExtensionSuite = ExtensionSuite.TreeList }
+    )
+}
+
+@section PageToolbar {
+    @Html.DevExpress().Menu(menuSettings =>
+{
+    menuSettings.Items.Add(item =>
+    {
+        item.Enabled = false;
+        item.SetTemplateContent(template => ViewContext.Writer.Write("<h1>Grid View</h1>"));
+    });
+
+    menuSettings.Items.Add(item =>
+    {
+        item.Name = "Edit";
+        item.Text = "Edit";
+        item.Alignment = MenuItemAlignment.Right;
+        item.AdaptivePriority = 2;
+        item.Image.Url = "/Content/Images/edit.svg";
+    });
+    menuSettings.Items.Add(item =>
+    {
+        item.Name = "ToggleFilterPanel";
+        item.Text = "";
+        item.GroupName = "Filter";
+        item.Alignment = MenuItemAlignment.Right;
+        item.AdaptivePriority = 1;
+        item.Image.Url = "/Content/Images/search.svg";
+        item.Image.UrlChecked = "/Content/Images/search-selected.svg";
+    });
+    LayoutHelper.PageToolbarSetting(menuSettings, "PageToolbar");
+}).GetHtml()
+@Html.Partial("_Panel_Search_Partial")
+}
+
+
+
+
+
+@*Nội dung page*@
+
+<div class="text-content" style="padding-top:15px">
+    @*<h2>Tiêu đề</h2>
+        <p>text</p>*@
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Action("GridViewPartial")
+    }
+</div>
+<div class="text-content" style="padding-top:15px">
+    <form>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+

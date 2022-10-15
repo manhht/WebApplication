@@ -1,0 +1,33 @@
+﻿@using WebApplication.Model;
+@model List<TreeListModel>
+
+@{
+    var gridView = Html.DevExpress().TreeList<TreeListModel>(Settings =>
+    {
+        Settings.Name = "gridView";
+        Settings.KeyFieldName = "Id";
+        Settings.ParentFieldName = "IdParent";
+        Settings.CallbackRouteValues = new { Controller = "TreeView", Action = "GridViewPartial" };
+        Settings.Width = Unit.Percentage(100);
+        Settings.Settings.GridLines = GridLines.Both;
+        Settings.SettingsBehavior.AllowDragDrop = true;
+        Settings.SettingsSearchPanel.CustomEditorName = "searchButtonEdit";
+        Settings.SettingsSearchPanel.CustomEditorName = "searchButtonEdit";
+        Settings.Settings.ShowHeaderFilterButton = true;
+
+        Settings.SettingsPager.PageSize = 15;
+        Settings.SettingsPager.EnableAdaptivity = true;
+        Settings.SettingsPager.PageSizeItemSettings.Visible = true;
+        Settings.SettingsExport.EnableClientSideExportAPI = true;
+        Settings.Columns.Add(a => a.Id);
+        Settings.Columns.Add(a => a.Name);
+        Settings.Columns.Add(a => a.IdParent);
+
+    });
+    if (ViewBag.GeneralError != null)
+    {
+        gridView.SetEditErrorText(ViewBag.GeneralError);
+    }
+}
+
+@gridView.Bind(Model).GetHtml()

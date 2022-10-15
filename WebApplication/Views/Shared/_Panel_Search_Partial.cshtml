@@ -1,0 +1,17 @@
+﻿@{
+    var panel = Html.DevExpress().Panel(panelSettings =>
+    {
+        panelSettings.SetContent(() =>
+        {
+            Html.DevExpress().ButtonEdit(buttonEditSettings =>
+            {
+                buttonEditSettings.Name = "searchButtonEdit";
+                buttonEditSettings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                buttonEditSettings.Properties.Caption = "Nhập nội dung cần tìm";
+                buttonEditSettings.Width = Unit.Percentage(100);
+            }).GetHtml();
+        });
+        LayoutHelper.panelsearch(panelSettings);
+    });
+    panel.GetHtml();
+}
