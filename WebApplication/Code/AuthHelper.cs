@@ -13,7 +13,7 @@ namespace WebApplication.Model {
         public static bool SignIn(string userName, string password) {
             HttpContext.Current.Session["User"] = CreateDefualtUser();  // Mock user data
             return true;
-        }
+        } 
         public static void SignOut() {
             HttpContext.Current.Session["User"] = null;
         }
