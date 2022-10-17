@@ -11,3 +11,17 @@
     <hr />
     <p>This is the GridView details page.</p>
 </div>
+
+<div class="text-content" style="padding-top:15px">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            @using (Html.BeginForm("UnobtrusiveValidation", "Common", FormMethod.Post, new { id = "validationForm", @class = "edit_form" }))
+            {
+                @Html.DevExpress().TextBoxFor(m => m.Subject, s => {
+               s.Name = "Subject";
+           }).GetHtml()
+                @Html.DevExpress().ValidationSummary().GetHtml()
+            }
+        </div>
+    </div>
+</div>
