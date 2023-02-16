@@ -1,12 +1,102 @@
-﻿@{
-    ViewBag.Title = "Home";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@model List<WebApplication.Model.Issue>
+
+@{
+    ViewBag.Title = "GridView";
+    Layout = "~/Views/Shared/_Layout_devextreme.cshtml";
 }
 
-@section LeftPanelContent {
-    @Html.Partial("LeftPanelPartial")
+@section Head {
+    <style>
+        .dx-datagrid .dx-data-row > td.bullet {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+    </style>
 }
 
-<div class="text-content" id="TextContent">
-    @Html.Raw(File.ReadAllText(Server.MapPath(@"~/App_Data/Overview.html")))
+@section PageToolbar {
+    <div class="container-fluid">
+        <div class="col">
+            <br />
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Library</li>
+                </ol>
+            </nav>
+            <hr>
+        </div>
+    </div>
+}
+@section RightPanelContent {
+    <div class="settings-content">
+        <h2 class="text-center">Tùy chọn khác</h2>
+        <ul class="list-group">
+            <button class="button list-group-item list-group-item-action" onclick="filterPanel.Toggle();rightPanel.Toggle()">Tìm kiếm</button>
+            <button class="button list-group-item list-group-item-action" onclick="gridView.ExportTo(ASPxClientGridViewExportFormat.Xlsx);rightPanel.Toggle()">Xuất Excel</button>
+            <button class="button list-group-item list-group-item-action" onclick="gridView.ShowCustomizationDialog();rightPanel.Toggle()">Tùy chỉnh bảng</button>
+            <button class="button list-group-item list-group-item-action" onclick="gridView.Refresh();rightPanel.Toggle()">Làm mới</button>
+        </ul>
+        @Html.Partial("_PartialPage_Themes")
+    </div>
+}
+<div class="text-content" style="padding-top:15px">
+    <h3>Tiêu đề</h3>
+    <p>text</p>
+    @(Html.DevExtreme().DataGrid<WebApplication.Model.Issue>()
+                                    .Columns(columns =>
+                                    {
+
+                                        columns.AddFor(m => m.Id);
+
+                                        columns.AddFor(m => m.Subject);
+
+                                        columns.AddFor(m => m.CustomerId).Lookup(lookup => lookup
+                                            .ValueExpr("Value")
+                                            .DisplayExpr("Text")
+                                        );
+
+                                        columns.AddFor(m => m.Created);
+
+                                        columns.AddFor(m => m.Updated);
+
+                                        columns.AddFor(m => m.Notes);
+
+                                        columns.AddFor(m => m.Unread);
+
+                                        columns.AddFor(m => m.IsDraft);
+
+                                        columns.AddFor(m => m.IsArchived);
+
+                                        columns.AddFor(m => m.Kind);
+
+                                        columns.AddFor(m => m.Priority);
+
+                                        columns.AddFor(m => m.Status);
+
+                                        columns.AddFor(m => m.Votes);
+                                    }).DataSource(Model).AllowColumnReordering(true)
+                                .ShowBorders(true)
+                                .Grouping(grouping =>
+                                {
+                                    grouping.AutoExpandAll(true);
+                                    grouping.Texts(text =>
+                                    {
+                                        text.GroupByThisColumn("texxxx");
+
+                                    });
+                                }
+                                )
+    .SearchPanel(searchPanel => searchPanel.Visible(true))
+    .GroupPanel(groupPanel => groupPanel.Visible(true))
+    .Paging(paging => paging.PageSize(10)).Pager(pager =>
+    {
+        pager.Visible(true);
+        pager.DisplayMode(GridPagerDisplayMode.Full);
+        pager.ShowPageSizeSelector(true);
+        pager.AllowedPageSizes(new JS("[5, 10, 'all']"));
+        pager.ShowInfo(true);
+        pager.ShowNavigationButtons(true);
+    })
+)
 </div>

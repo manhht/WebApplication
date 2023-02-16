@@ -1,0 +1,108 @@
+﻿using DevExpress.Web.Mvc;
+using System;
+using System.Linq;
+using System.Web;
+using System.Web.Http;
+using System.Web.Mvc;
+using System.Web.Routing;
+using WebApplication.Controllers;
+
+namespace WebApplication
+{
+    // Note: For instructions on enabling IIS6 or IIS7 classic mode,
+    // visit http://go.microsoft.com/?LinkId=9394801
+
+    public class MvcApplication : System.Web.HttpApplication
+    {
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            var httpContext = ((MvcApplication)sender).Context;
+            var currentController = " ";
+            var currentAction = " ";
+            var currentRouteData = RouteTable.Routes.GetRouteData(new HttpContextWrapper(httpContext));
+
+            if (currentRouteData != null)
+            {
+                if (currentRouteData.Values["controller"] != null &&
+                    !String.IsNullOrEmpty(currentRouteData.Values["controller"].ToString()))
+                {
+                    currentController = currentRouteData.Values["controller"].ToString();
+                }
+
+                if (currentRouteData.Values["action"] != null &&
+                    !String.IsNullOrEmpty(currentRouteData.Values["action"].ToString()))
+                {
+                    currentAction = currentRouteData.Values["action"].ToString();
+                }
+            }
+
+            var ex = Server.GetLastError();
+            //var controller = new ErrorController();
+            var routeData = new RouteData();
+            var action = "GenericError";
+
+            if (ex is HttpException)
+            {
+                var httpEx = ex as HttpException;
+
+                switch (httpEx.GetHttpCode())
+                {
+                    case 404:
+                        action = "NotFound";
+                        break;
+
+                    default:
+                        action = "NotFound";
+                        break;
+                        // others if any
+                }
+            }
+
+            httpContext.ClearError();
+            httpContext.Response.Clear();
+            httpContext.Response.StatusCode = ex is HttpException ? ((HttpException)ex).GetHttpCode() : 500;
+            httpContext.Response.TrySkipIisCustomErrors = true;
+
+            routeData.Values["controller"] = "Error";
+            routeData.Values["action"] = action;
+            routeData.Values["exception"] = new HandleErrorInfo(ex, currentController, currentAction);
+
+            IController errormanagerController = new HomeController();
+            HttpContextWrapper wrapper = new HttpContextWrapper(httpContext);
+            var rc = new RequestContext(wrapper, routeData);
+            errormanagerController.Execute(rc);
+        }
+
+        protected void Application_PreRequestHandlerExecute(object sender, EventArgs e)
+        {
+            var theme = "Office365";
+            if (HttpContext.Current.Request.Cookies["DXCurrentTheme"] != null)
+            {
+                theme = HttpContext.Current.Request.Cookies["DXCurrentTheme"].Value.ToString();
+            }
+            var color = "#F87C1D";
+            if (HttpContext.Current.Request.Cookies["DXCurrentBaseColor"] != null)
+            {
+                color = HttpContext.Current.Request.Cookies["DXCurrentBaseColor"].Value.ToString();
+            }
+            DevExpressHelper.Theme = theme;
+            DevExpressHelper.GlobalThemeBaseColor = color;
+            DevExpressHelper.ClientUIControlColorScheme = color;
+            DevExpressHelper.GlobalThemeFont = "14px 'Segoe UI', Helvetica, 'Droid Sans', Tahoma, Geneva, sans-serif";
+        }
+
+        protected void Application_Start()
+        {
+            AreaRegistration.RegisterAllAreas();
+
+            GlobalConfiguration.Configure(WebApiConfig.Register);
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            ModelBinders.Binders.DefaultBinder = new DevExpress.Web.Mvc.DevExpressEditorsBinder();
+
+            DevExpress.Web.ASPxWebControl.CallbackError += Application_Error;
+            log4net.Config.XmlConfigurator.Configure();
+        }
+    }
+}

@@ -1,0 +1,138 @@
+﻿@{
+    Layout = null;
+}
+@model System.Web.Mvc.HandleErrorInfo
+@{
+    ViewBag.Title = ViewBag.Title ?? "Internal Server Error";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/2048-master/css/keyframes.css" rel="stylesheet" />
+    <link href="~/Content/2048-master/css/media.css" rel="stylesheet" />
+    <link href="~/Content/2048-master/css/style.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    @*<div class="error-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div class="error-text">
+                            <h1 class="error">Error</h1>
+                            <div class="im-sheep">
+                                <div class="top">
+                                    <div class="body"></div>
+                                    <div class="head">
+                                        <div class="im-eye one"></div>
+                                        <div class="im-eye two"></div>
+                                        <div class="im-ear one"></div>
+                                        <div class="im-ear two"></div>
+                                    </div>
+                                </div>
+                                <div class="im-legs">
+                                    <div class="im-leg"></div>
+                                    <div class="im-leg"></div>
+                                    <div class="im-leg"></div>
+                                    <div class="im-leg"></div>
+                                </div>
+                            </div>
+                            <h4>Error : @ViewBag.Title</h4>
+                            <p>An unexpected error has occurred. Please contact the system administrator.</p>
+                            <p>
+                                <b>Time:</b> @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")<br />
+                            </p>
+                            <a href="/" class="btn btn-primary btn-round">Go to homepage</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    <div class="container">
+
+        <div class="heading">
+            <h1 class="title">
+                Error
+            </h1>
+        </div>
+        <div class="game-intro">
+            <p class="subtitle">An unexpected error has occurred. Please contact the system administrator.</p>
+            <h2 class="subtitle">
+                Error : @ViewBag.Title
+            </h2>
+            <p class="above-game">
+                <b>Time:</b> @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")<br />
+            </p>
+        </div>
+        @*<div class="game-intro">
+            <p class="above-game">
+                <a href="" class="restart-btn">New Game</a>
+            </p>
+        </div>
+        <br />
+        <div class="scores-container">
+            <div class="score-container">
+                <p class="title">SCORE</p>
+                <P class="score">0</P>
+                <div class="score-addition">
+                    +4
+                </div>
+            </div>
+            <div class="best-container">
+                <p class="title">BEST</p>
+                <P class="score">66666</P>
+            </div>
+        </div>
+        <div class="game-container">
+            <div class="grid-container">
+                <div class="grid-row">
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                </div>
+            </div>
+            <div class="tile-container">
+
+            </div>
+            <div class="failure-container pop-container">
+                <p>:(</span></p>
+                <p>FIALURE</p>
+            </div>
+            <div class="winning-container pop-container">
+                <p>:)</p>
+                <p>WINNING</p>
+            </div>
+        </div>*@
+    </div>
+    <script src="~/Content/2048-master/js/config.js"></script>
+    <script src="~/Content/2048-master/js/data.js"></script>
+    <script src="~/Content/2048-master/js/utils.js"></script>
+    <script src="~/Content/2048-master/js/event.js"></script>
+    <script src="~/Content/2048-master/js/view.js"></script>
+    <script src="~/Content/2048-master/js/game.js"></script>
+    <script src="~/Content/2048-master/js/main.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

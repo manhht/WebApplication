@@ -1,0 +1,40 @@
+﻿@{
+    var theme = "Office365";
+    if (HttpContext.Current.Request.Cookies["DXCurrentTheme"] != null)
+    {
+        theme = HttpContext.Current.Request.Cookies["DXCurrentTheme"].Value.ToString();
+    }
+    var color = "#F87C1D";
+    if (HttpContext.Current.Request.Cookies["DXCurrentBaseColor"] != null)
+    {
+        color = HttpContext.Current.Request.Cookies["DXCurrentBaseColor"].Value.ToString();
+    }
+}
+<br />
+<h2 class="text-center">Chọn chủ đề</h2>
+<ul class="list-group">
+    @foreach (var item in LayoutHelper.theme_name)
+    {
+        <button class="button list-group-item list-group-item-action" onclick="changetheme('@item')">
+
+            @item  @if (item == theme)
+            {
+                @Html.Raw("&#9989;")
+            }
+        </button>
+    }
+</ul>
+<br />
+<h2 class="text-center">Chọn màu nền</h2>
+<ul class="list-group">
+    @foreach (var item in LayoutHelper.CustomBaseColors)
+    {
+        <button class="button list-group-item list-group-item-action" style="background:@Html.Raw(item)" onclick="changeBaseColor('@item')">
+            @item
+            @if (item == color)
+            {
+                @Html.Raw("&#9989;")
+            }
+        </button>
+    }
+</ul>

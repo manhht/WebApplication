@@ -7,7 +7,7 @@ using WebApplication.Model;
 using System.Threading.Tasks;
 
 namespace WebApplication.Controllers {
-    public class AccountController : BaseController {
+    public class AccountController : Controller {
         // GET: /Account/SignIn
         [AllowAnonymous]
         public ActionResult SignIn(string returnUrl) {
@@ -28,7 +28,7 @@ namespace WebApplication.Controllers {
             if(AuthHelper.SignIn(model.UserName, model.Password))
                 return RedirectToAction("Index", "Home");
             else {
-                SetErrorText("Invalid login attempt.");
+ 
                 ModelState.AddModelError("", ViewBag.GeneralError);
                 return View(model);
             }

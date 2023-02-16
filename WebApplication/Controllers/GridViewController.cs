@@ -1,9 +1,11 @@
 ﻿using WebApplication.Model;
 using System;
 using System.Web.Mvc;
+using WebApplication.Code;
+using MimeKit;
 
 namespace WebApplication.Controllers {
-    public class GridViewController : BaseController {
+    public class GridViewController : Controller {
         // GET: GridView
         public ActionResult Index()
         {
@@ -18,8 +20,7 @@ namespace WebApplication.Controllers {
         }
         [ValidateAntiForgeryToken]
         public ActionResult GridViewCustomActionPartial(string customAction) {
-            if(customAction == "delete")
-                SafeExecute(() => PerformDelete());
+          
             return GridViewPartial();
         }
         [ValidateAntiForgeryToken]
@@ -32,10 +33,7 @@ namespace WebApplication.Controllers {
         }
 
         private ActionResult UpdateModelWithDataValidation(Issue issue, Action<Issue> updateMethod) {
-            if(ModelState.IsValid)
-                SafeExecute(() => updateMethod(issue));
-            else
-                ViewBag.GeneralError = "Please, correct all errors.";
+
             return GridViewPartial();
         }
         private void PerformDelete() {

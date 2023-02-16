@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -26,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,28 +45,100 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Web.Mvc5.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Office.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.RichEdit.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Web.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExtreme.AspNet.Data, Version=2.8.6.0, Culture=neutral, PublicKeyToken=982f5dab1439d0f7, processorArchitecture=MSIL">
+      <HintPath>..\packages\DevExtreme.AspNet.Data.2.8.6\lib\net452\DevExtreme.AspNet.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExtreme.AspNet.Mvc">
+      <HintPath>..\lib\DevExtreme\DevExtreme.AspNet.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    <Reference Include="Google.Apis, Version=1.58.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.58.0\lib\net45\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.58.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.58.0\lib\net461\Google.Apis.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.58.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.58.0\lib\net461\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.58.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Core.1.58.0\lib\net45\Google.Apis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Gmail.v1, Version=1.58.0.2650, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Gmail.v1.1.58.0.2650\lib\net45\Google.Apis.Gmail.v1.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.58.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.58.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.15\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MailKit, Version=3.4.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailKit.3.4.3\lib\net47\MailKit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="MimeKit, Version=3.4.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeKit.3.4.3\lib\net47\MimeKit.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -85,6 +157,9 @@
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
@@ -107,52 +182,104 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="DevExpress.Data.v22.1, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Web.ASPxThemes.v22.1, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.RichEdit.v22.1.Core, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.RichEdit.v22.1.Export, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Printing.v22.1.Core, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Web.v22.1, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Web.Mvc5.v22.1, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraScheduler.v22.1.Core, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraScheduler.v22.1.Core.Desktop, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Web.ASPxScheduler.v22.1, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Web.ASPxTreeList.v22.1, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Web.ASPxHtmlEditor.v22.1, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraReports.v22.1, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraReports.v22.1.Web, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraReports.v22.1.Web.WebForms, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Pdf.v22.1.Core, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Web.Resources.v22.1, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Charts.v22.1.Core, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.CodeParser.v22.1, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.DataAccess.v22.1, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Office.v22.1.Core, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.PivotGrid.v22.1.Core, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Sparkline.v22.1.Core, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Xpo.v22.1, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraCharts.v22.1, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraGauges.v22.1.Core, Version=22.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
     <Reference Include="WebMatrix.Data, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.3.2.9\lib\net45\WebMatrix.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\2048-master\css\keyframes.css" />
+    <Content Include="App_Data\2048-master\css\media.css" />
+    <Content Include="App_Data\2048-master\css\style.css" />
+    <Content Include="App_Data\2048-master\font\clear-sans.css" />
+    <Content Include="App_Data\2048-master\index.html" />
+    <Content Include="App_Data\2048-master\js\config.js" />
+    <Content Include="App_Data\2048-master\js\data.js" />
+    <Content Include="App_Data\2048-master\js\event.js" />
+    <Content Include="App_Data\2048-master\js\game.js" />
+    <Content Include="App_Data\2048-master\js\main.js" />
+    <Content Include="App_Data\2048-master\js\utils.js" />
+    <Content Include="App_Data\2048-master\js\view.js" />
     <Content Include="App_Data\ApplicationMenuDataSource.sitemap" />
     <Content Include="App_Data\Article.html" />
     <Content Include="App_Data\ArticleContents.xml" />
     <Content Include="App_Data\Overview.html" />
     <Content Include="App_Data\OverviewContents.xml" />
+    <Content Include="Content\2048-master\css\keyframes.css" />
+    <Content Include="Content\2048-master\css\media.css" />
+    <Content Include="Content\2048-master\css\style.css" />
+    <Content Include="Content\2048-master\font\clear-sans.css" />
+    <Content Include="Content\2048-master\index.html" />
+    <Content Include="Content\2048-master\js\config.js" />
+    <Content Include="Content\2048-master\js\data.js" />
+    <Content Include="Content\2048-master\js\event.js" />
+    <Content Include="Content\2048-master\js\game.js" />
+    <Content Include="Content\2048-master\js\main.js" />
+    <Content Include="Content\2048-master\js\utils.js" />
+    <Content Include="Content\2048-master\js\view.js" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
     <Content Include="Content\bootstrap.bundle.js" />
     <Content Include="Content\bootstrap.bundle.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.min.js" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Charset.css" />
     <Content Include="Content\Content.css" />
+    <Content Include="Content\dx-diagram.css" />
+    <Content Include="Content\dx-diagram.min.css" />
+    <Content Include="Content\dx-gantt.css" />
+    <Content Include="Content\dx-gantt.min.css" />
+    <Content Include="Content\dx.carmine.compact.css" />
+    <Content Include="Content\dx.carmine.css" />
+    <Content Include="Content\dx.contrast.compact.css" />
+    <Content Include="Content\dx.contrast.css" />
+    <Content Include="Content\dx.dark.compact.css" />
+    <Content Include="Content\dx.dark.css" />
+    <Content Include="Content\dx.darkmoon.compact.css" />
+    <Content Include="Content\dx.darkmoon.css" />
+    <Content Include="Content\dx.darkviolet.compact.css" />
+    <Content Include="Content\dx.darkviolet.css" />
+    <Content Include="Content\dx.greenmist.compact.css" />
+    <Content Include="Content\dx.greenmist.css" />
+    <Content Include="Content\dx.light.compact.css" />
+    <Content Include="Content\dx.light.css" />
+    <Content Include="Content\dx.material.blue.dark.compact.css" />
+    <Content Include="Content\dx.material.blue.dark.css" />
+    <Content Include="Content\dx.material.blue.light.compact.css" />
+    <Content Include="Content\dx.material.blue.light.css" />
+    <Content Include="Content\dx.material.lime.dark.compact.css" />
+    <Content Include="Content\dx.material.lime.dark.css" />
+    <Content Include="Content\dx.material.lime.light.compact.css" />
+    <Content Include="Content\dx.material.lime.light.css" />
+    <Content Include="Content\dx.material.orange.dark.compact.css" />
+    <Content Include="Content\dx.material.orange.dark.css" />
+    <Content Include="Content\dx.material.orange.light.compact.css" />
+    <Content Include="Content\dx.material.orange.light.css" />
+    <Content Include="Content\dx.material.purple.dark.compact.css" />
+    <Content Include="Content\dx.material.purple.dark.css" />
+    <Content Include="Content\dx.material.purple.light.compact.css" />
+    <Content Include="Content\dx.material.purple.light.css" />
+    <Content Include="Content\dx.material.teal.dark.compact.css" />
+    <Content Include="Content\dx.material.teal.dark.css" />
+    <Content Include="Content\dx.material.teal.light.compact.css" />
+    <Content Include="Content\dx.material.teal.light.css" />
+    <Content Include="Content\dx.softblue.compact.css" />
+    <Content Include="Content\dx.softblue.css" />
     <Content Include="Content\GridView.css" />
     <Content Include="Content\GridView.js" />
     <Content Include="Content\Images\adaptive-menu.svg" />
@@ -168,6 +295,7 @@
     <Content Include="Content\Images\export.svg" />
     <Content Include="Content\Images\eye-button-hide.svg" />
     <Content Include="Content\Images\eye-button.svg" />
+    <Content Include="Content\Images\funny-404-error-page-design.gif" />
     <Content Include="Content\Images\GridView-white.svg" />
     <Content Include="Content\Images\GridView.svg" />
     <Content Include="Content\Images\Home-white.svg" />
@@ -245,6 +373,88 @@
     <Content Include="Global.asax" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\aspnet\dx.aspnet.data.js" />
+    <Content Include="Scripts\aspnet\dx.aspnet.mvc.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\cldr.js" />
+    <Content Include="Scripts\cldr.min.js" />
+    <Content Include="Scripts\cldr\event.js" />
+    <Content Include="Scripts\cldr\event.min.js" />
+    <Content Include="Scripts\cldr\supplemental.js" />
+    <Content Include="Scripts\cldr\supplemental.min.js" />
+    <Content Include="Scripts\cldr\unresolved.js" />
+    <Content Include="Scripts\cldr\unresolved.min.js" />
+    <Content Include="Scripts\dx-diagram.js" />
+    <Content Include="Scripts\dx-diagram.min.js" />
+    <Content Include="Scripts\dx-gantt.js" />
+    <Content Include="Scripts\dx-gantt.min.js" />
+    <Content Include="Scripts\dx-quill.js" />
+    <Content Include="Scripts\dx-quill.min.js" />
+    <Content Include="Scripts\dx.all.debug.js" />
+    <Content Include="Scripts\dx.all.js" />
+    <Content Include="Scripts\dx.viz.debug.js" />
+    <Content Include="Scripts\dx.viz.js" />
+    <Content Include="Scripts\dx.web.debug.js" />
+    <Content Include="Scripts\dx.web.js" />
+    <Content Include="Scripts\exceljs.js" />
+    <Content Include="Scripts\exceljs.min.js" />
+    <Content Include="Scripts\FileSaver.js" />
+    <Content Include="Scripts\FileSaver.min.js" />
+    <Content Include="Scripts\globalize.js" />
+    <Content Include="Scripts\globalize.min.js" />
+    <Content Include="Scripts\globalize\currency.js" />
+    <Content Include="Scripts\globalize\currency.min.js" />
+    <Content Include="Scripts\globalize\date.js" />
+    <Content Include="Scripts\globalize\date.min.js" />
+    <Content Include="Scripts\globalize\message.js" />
+    <Content Include="Scripts\globalize\message.min.js" />
+    <Content Include="Scripts\globalize\number.js" />
+    <Content Include="Scripts\globalize\number.min.js" />
+    <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jspdf.plugin.autotable.js" />
+    <Content Include="Scripts\jspdf.plugin.autotable.min.js" />
+    <Content Include="Scripts\jspdf.umd.js" />
+    <Content Include="Scripts\jspdf.umd.min.js" />
+    <Content Include="Scripts\jszip.js" />
+    <Content Include="Scripts\jszip.min.js" />
+    <Content Include="Scripts\localization\dx.messages.ar.js" />
+    <Content Include="Scripts\localization\dx.messages.ca.js" />
+    <Content Include="Scripts\localization\dx.messages.cs.js" />
+    <Content Include="Scripts\localization\dx.messages.de.js" />
+    <Content Include="Scripts\localization\dx.messages.el.js" />
+    <Content Include="Scripts\localization\dx.messages.en.js" />
+    <Content Include="Scripts\localization\dx.messages.es.js" />
+    <Content Include="Scripts\localization\dx.messages.fi.js" />
+    <Content Include="Scripts\localization\dx.messages.fr.js" />
+    <Content Include="Scripts\localization\dx.messages.hu.js" />
+    <Content Include="Scripts\localization\dx.messages.it.js" />
+    <Content Include="Scripts\localization\dx.messages.ja.js" />
+    <Content Include="Scripts\localization\dx.messages.lt.js" />
+    <Content Include="Scripts\localization\dx.messages.nb.js" />
+    <Content Include="Scripts\localization\dx.messages.nl.js" />
+    <Content Include="Scripts\localization\dx.messages.pt.js" />
+    <Content Include="Scripts\localization\dx.messages.ro.js" />
+    <Content Include="Scripts\localization\dx.messages.ru.js" />
+    <Content Include="Scripts\localization\dx.messages.sl.js" />
+    <Content Include="Scripts\localization\dx.messages.sv.js" />
+    <Content Include="Scripts\localization\dx.messages.tr.js" />
+    <Content Include="Scripts\localization\dx.messages.vi.js" />
+    <Content Include="Scripts\localization\dx.messages.zh-tw.js" />
+    <Content Include="Scripts\localization\dx.messages.zh.js" />
+    <Content Include="Scripts\vectormap-data\africa.js" />
+    <Content Include="Scripts\vectormap-data\canada.js" />
+    <Content Include="Scripts\vectormap-data\eurasia.js" />
+    <Content Include="Scripts\vectormap-data\europe.js" />
+    <Content Include="Scripts\vectormap-data\usa.js" />
+    <Content Include="Scripts\vectormap-data\world.js" />
+    <Content Include="Scripts\vectormap-utils\dx.vectormaputils.debug.js" />
+    <Content Include="Scripts\vectormap-utils\dx.vectormaputils.js" />
+    <Content Include="Scripts\vectormap-utils\dx.vectormaputils.node.js" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -260,7 +470,6 @@
     <Content Include="Views\GridView\GridViewPartial.cshtml" />
     <Content Include="Views\GridView\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\LeftPanelPartial.cshtml" />
     <Content Include="Views\Scheduler\FilterComboBoxPartial.cshtml" />
     <Content Include="Views\Scheduler\Index.cshtml" />
     <Content Include="Views\Scheduler\LeftPanelPartial.cshtml" />
@@ -276,12 +485,55 @@
     <Content Include="Content\bootstrap-reboot.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Areas\AdminPanel\Views\web.config" />
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="App_Data\2048-master\font\ClearSans-Bold-webfont.woff" />
+    <Content Include="App_Data\2048-master\font\ClearSans-Regular-webfont.woff" />
+    <Content Include="Content\2048-master\font\ClearSans-Bold-webfont.woff" />
+    <Content Include="Content\2048-master\font\ClearSans-Regular-webfont.woff" />
+    <Content Include="Content\fonts\Roboto-300.ttf" />
+    <Content Include="Content\fonts\Roboto-300.woff" />
+    <Content Include="Content\fonts\Roboto-300.woff2" />
+    <Content Include="Content\fonts\Roboto-400.ttf" />
+    <Content Include="Content\fonts\Roboto-400.woff" />
+    <Content Include="Content\fonts\Roboto-400.woff2" />
+    <Content Include="Content\fonts\Roboto-500.ttf" />
+    <Content Include="Content\fonts\Roboto-500.woff" />
+    <Content Include="Content\fonts\Roboto-500.woff2" />
+    <Content Include="Content\fonts\Roboto-700.ttf" />
+    <Content Include="Content\fonts\Roboto-700.woff" />
+    <Content Include="Content\fonts\Roboto-700.woff2" />
+    <Content Include="Content\icons\dxicons.ttf" />
+    <Content Include="Content\icons\dxicons.woff" />
+    <Content Include="Content\icons\dxicons.woff2" />
+    <Content Include="Content\icons\dxiconsmaterial.ttf" />
+    <Content Include="Content\icons\dxiconsmaterial.woff" />
+    <Content Include="Content\icons\dxiconsmaterial.woff2" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_LayoutPage_Child.cshtml" />
     <Content Include="Views\Shared\LeftPanelPartial.cshtml" />
     <Content Include="Views\TreeView\GridViewPartial.cshtml" />
     <Content Include="Views\TreeView\Index.cshtml" />
     <Content Include="Views\Shared\_Panel_Search_Partial.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Views\Shared\_PartialPage_Themes.cshtml" />
+    <Content Include="Views\Shared\_Layout_devextreme.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -290,32 +542,39 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\DevExtremeBundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\AdminPanel\AdminPanelAreaRegistration.cs" />
     <Compile Include="Code\AuthHelper.cs" />
     <Compile Include="Code\DBContext.cs" />
+    <Compile Include="Code\EmailServiceProvider.cs" />
     <Compile Include="Code\LayoutHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ArticleController.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\GridViewController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\SchedulerController.cs" />
     <Compile Include="Controllers\TreeViewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Account\AccountViewModels.cs" />
     <Compile Include="Models\GridView\GridViewHelper.cs" />
-    <Compile Include="Models\Scheduler\SchedulerDataSource.cs" />
-    <Compile Include="Models\Scheduler\SchedulerHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Areas\AdminPanel\Controllers\" />
+    <Folder Include="Areas\AdminPanel\Data\" />
+    <Folder Include="Areas\AdminPanel\Views\Shared\" />
+    <Folder Include="ErrorLog\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
@@ -337,7 +596,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>61505</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:61505/</IISUrl>
+          <IISUrl>https://localhost:44369/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -353,7 +612,8 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
 </Project>

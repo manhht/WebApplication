@@ -1,6 +1,11 @@
-﻿/* Layout */
-html, body, .form
-{
+﻿ .dxm-horizontal{
+     background:unset !important;
+ }
+.app-header, .dxpnl-edge {
+    background: #fff !important;
+}
+/* Layout */
+html, body, .form {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -160,7 +165,7 @@ html
 
 .app-header .header-menu .item.selected
 {
-    color: inherit;
+    /*color: inherit;*/
     box-sizing: border-box;
     /* DXCOMMENT: Duplicates color from the web.config (devexpress->themes->baseColor) */
     border-bottom: solid 2px #F87C1D;
@@ -363,7 +368,7 @@ html
 
 a.tree-view-node
 {
-    color: #666666;
+    /*color: #666666;*/
     padding-top: 7px !important;
     padding-bottom: 8px !important;
     padding-right: 8px !important;
@@ -388,7 +393,7 @@ a.tree-view-node.hovered
 
 .settings-content
 {
-    padding: 24px 20px;
+    padding: 24px 10px;
 }
 
 .settings-content h2

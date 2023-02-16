@@ -9,6 +9,8 @@
                 buttonEditSettings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
                 buttonEditSettings.Properties.Caption = "Nhập nội dung cần tìm";
                 buttonEditSettings.Width = Unit.Percentage(100);
+                buttonEditSettings.Properties.Buttons.Add("Ẩn");
+                buttonEditSettings.Properties.ClientSideEvents.ButtonClick = "function(){filterPanel.Toggle()}";
             }).GetHtml();
         });
         LayoutHelper.panelsearch(panelSettings);

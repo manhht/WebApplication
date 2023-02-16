@@ -7,14 +7,50 @@ using System.Web.UI.WebControls;
 using DevExpress.Web.Mvc;
 using DevExpress.Web.Mvc.UI;
 using System.Web.Mvc;
-using static DevExpress.DataAccess.Native.Sql.QueryBuilder.AvailableItemData;
 using DevExpress.Utils;
 
 namespace WebApplication.Code
 {
     public static class LayoutHelper
     {
-        public static void PageToolbarSetting(MenuSettings menuSettings,string name_menu)
+        public static string[] theme_name
+        {
+            get
+            {
+                return new string[] {
+                    "Default",
+        "DevEx",
+        "Metropolis",
+        "MetropolisBlue",
+        "Material",
+        "MaterialCompact",
+        "Office365",
+        "Aqua",
+        "Glass",
+        "Mulberry",
+        "PlasticBlue",
+        "Office2010",
+        "Office2010Blue",
+                };
+            }
+        }
+
+        public static string[] CustomBaseColors
+        {
+            get
+            {
+                return new string[] {
+                    "#4796CE",
+                    "#35B86B",
+                    "#CE5B47",
+                    "#9F47CE",
+                    "#5C57C9",
+                    "#CE4776",
+                };
+            }
+        }
+
+        public static void PageToolbarSetting(MenuSettings menuSettings, string name_menu)
         {
             menuSettings.Name = name_menu;
 
@@ -52,6 +88,7 @@ namespace WebApplication.Code
             panelSettings.ClientSideEvents.Collapsed = "adjustPageControls";
         }
     }
+
     public static class GridViewSettingHelper
     {
         public static void SettingGridView(GridViewSettings gridViewSettings)
@@ -60,11 +97,13 @@ namespace WebApplication.Code
 
             gridViewSettings.ControlStyle.CssClass = "grid-view";
             gridViewSettings.Width = Unit.Percentage(100);
+            gridViewSettings.SettingsLoadingPanel.Mode = GridViewLoadingPanelMode.Default;
 
             gridViewSettings.Styles.Cell.Wrap = DefaultBoolean.False;
             gridViewSettings.Styles.PagerBottomPanel.CssClass = "pager";
             gridViewSettings.Styles.FocusedRow.CssClass = "focused";
-
+            gridViewSettings.SettingsFilterControl.ViewMode = FilterControlViewMode.VisualAndText;
+            gridViewSettings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
             gridViewSettings.SettingsBehavior.AllowFocusedRow = true;
             gridViewSettings.SettingsBehavior.AllowSelectByRowClick = true;
             gridViewSettings.SettingsBehavior.AllowEllipsisInText = false;
@@ -75,13 +114,19 @@ namespace WebApplication.Code
             gridViewSettings.Settings.VerticalScrollBarMode = ScrollBarMode.Hidden;
             gridViewSettings.Settings.ShowHeaderFilterButton = true;
             gridViewSettings.Settings.GridLines = GridLines.Both;
-            gridViewSettings.SettingsPager.PageSize = 15;
+            gridViewSettings.SettingsPager.PageSize = 50;
+            gridViewSettings.SettingsPager.PageSizeItemSettings.ShowAllItem = true;
+            gridViewSettings.SettingsPager.PageSizeItemSettings.Items = new string[] { "5", "10", "20", "50", "100", "200", "500", "1000" };
             gridViewSettings.SettingsPager.Position = PagerPosition.TopAndBottom;
             gridViewSettings.SettingsPager.PageSizeItemSettings.ShowAllItem = true;
             gridViewSettings.SettingsPager.EnableAdaptivity = true;
             gridViewSettings.SettingsPager.PageSizeItemSettings.Visible = true;
             gridViewSettings.SettingsPager.PageSizeItemSettings.AllItemText = "Tất cả";
             gridViewSettings.SettingsPager.Summary.Text = "Đang xem {0} đến {1} trong tổng số {2} mục";
+            gridViewSettings.SettingsPager.FirstPageButton.Visible = true;
+            gridViewSettings.SettingsPager.LastPageButton.Visible = true;
+            gridViewSettings.SettingsPager.PrevPageButton.Visible = true;
+            gridViewSettings.SettingsPager.NextPageButton.Visible = true;
             gridViewSettings.SettingsExport.EnableClientSideExportAPI = true;
             gridViewSettings.SettingsExport.ExportSelectedRowsOnly = false;
 
@@ -117,7 +162,8 @@ namespace WebApplication.Code
             gridViewSettings.SettingsText.BatchEditChangesPreviewUpdatedValues = "Cập nhật";
 
             gridViewSettings.SettingsText.CommandNew = "Thêm";
-            gridViewSettings.SettingsText.CommandUpdate = "Cập nhật";
+            gridViewSettings.SettingsText.CommandUpdate = "Lưu";
+            gridViewSettings.SettingsText.CommandEdit = "Cập nhật";
             gridViewSettings.SettingsText.CommandDelete = "Xóa";
             gridViewSettings.SettingsText.CommandCancel = "Hủy";
             gridViewSettings.SettingsText.CommandRecover = "Hoàn tác";
@@ -135,20 +181,23 @@ namespace WebApplication.Code
 
             gridViewSettings.SettingsText.ContextMenuExpandDetailRow = "Chi tiết";
 
-
             gridViewSettings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = true;
             gridViewSettings.SettingsCustomizationDialog.Enabled = true;
             gridViewSettings.SettingsText.CustomizationWindowCaption = "";
+            gridViewSettings.SettingsText.CustomizationDialogColumnChooserTab = "Chọn cột";
+            gridViewSettings.SettingsText.CustomizationDialogSortingTab = "Sắp xếp";
+            gridViewSettings.SettingsText.CustomizationDialogGroupingTab = "Nhóm cột";
+            gridViewSettings.SettingsText.CustomizationDialogFilteringTab = "Lọc";
             //gridViewSettings.Styles.Cell.Font.Size = 9;
-            gridViewSettings.Styles.Header.Font.Size = 9;
-            gridViewSettings.Styles.GroupRow.Font.Size = 9;
-            gridViewSettings.Styles.CommandColumn.Font.Size = 9;
-            gridViewSettings.Styles.PagerTopPanel.Font.Size = 9;
-            gridViewSettings.Styles.PagerBottomPanel.Font.Size = 9;
-            gridViewSettings.Styles.GroupFooter.Font.Size = 9;
-            gridViewSettings.Styles.GroupPanel.Font.Size = 9;
-            gridViewSettings.Styles.Footer.Font.Size = 9;
-            gridViewSettings.Styles.StatusBar.Font.Size = 5;
+            //gridViewSettings.Styles.Header.Font.Size = 9;
+            //gridViewSettings.Styles.GroupRow.Font.Size = 9;
+            //gridViewSettings.Styles.CommandColumn.Font.Size = 9;
+            //gridViewSettings.Styles.PagerTopPanel.Font.Size = 9;
+            //gridViewSettings.Styles.PagerBottomPanel.Font.Size = 9;
+            //gridViewSettings.Styles.GroupFooter.Font.Size = 9;
+            //gridViewSettings.Styles.GroupPanel.Font.Size = 9;
+            //gridViewSettings.Styles.Footer.Font.Size = 9;
+            //gridViewSettings.Styles.StatusBar.Font.Size = 5;
 
             gridViewSettings.Styles.Cell.Paddings.PaddingTop = 5;
             gridViewSettings.Styles.Cell.Paddings.PaddingBottom = 5;
@@ -164,8 +213,36 @@ namespace WebApplication.Code
             gridViewSettings.StylesToolbar.Style.Paddings.Padding = 5;
             gridViewSettings.Settings.GridLines = GridLines.Both;
 
+            gridViewSettings.Columns.Add(c =>
+            {
+                c.Name = "STT";
+                c.Caption = "STT";
+                c.VisibleIndex = 0;
+                c.Width = 30;
+                c.MaxWidth = 30;
+                c.Settings.AllowSort = DefaultBoolean.True;
+                c.Settings.AllowAutoFilter = DefaultBoolean.False;
+                c.EditFormSettings.Visible = DefaultBoolean.False;
+            });
+            gridViewSettings.CustomColumnDisplayText = (s, e) =>
+            {
+                var gr = s as GridViewExtension;
+                if (e.Column.Name != "STT")
+                    return;
+                e.Value = e.VisibleIndex + 1;
+                e.DisplayText = (e.VisibleIndex + 1).ToString();
+            };
+            gridViewSettings.SettingsExport.BeforeExport = (sender, e) =>
+            {
+                MVCxGridView gridView = sender as MVCxGridView;
+                if (sender == null)
+                    return;
+                gridView.Columns["STT"].Visible = true;
+            };
             foreach (GridViewDataColumn column in gridViewSettings.Columns)
+            {
                 column.SettingsHeaderFilter.Mode = GridHeaderFilterMode.CheckedList;
+            }
         }
     }
 }

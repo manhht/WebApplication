@@ -1,0 +1,70 @@
+﻿@using WebApplication.Model
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>
+        @{ var pageTitleParts = new string[] { ViewBag.Title, "ASP.NET MVC Responsive Project Template | DevExpress" }; }
+        @string.Join(" - ", @pageTitleParts.Where(s => !string.IsNullOrEmpty(s)))
+    </title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0" />
+    @Html.DevExpress().GetStyleSheets(
+        new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout }
+)
+    @Html.DevExpress().GetScripts(
+            new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout }
+            )
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/Content.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/Layout.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/GridView.css")" />
+    <script type="text/javascript" src="@Url.Content("~/Content/GridView.js")"></script>
+    @RenderSection("Head", false)
+    <script type="text/javascript" src="@Url.Content("~/Content/Script.js")"></script>
+
+    <script src="~/Content/bootstrap.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script>
+        // sending the __RequestVerificationToken value manually, see details: https://github.com/DevExpress/aspnet-security-bestpractices/tree/master/SecurityBestPractices.Mvc#4-preventing-cross-site-request-forgery-csrf
+        if (window.jQuery) {
+            $.ajaxPrefilter(function (options, originalOptions, xhr) {
+                if (options.dataType && options.dataType !== "html")
+                    return;
+                var tokenValue = $('input:hidden[name="__RequestVerificationToken"]').val();
+                if (tokenValue && options && options.data && options.data.indexOf('RequestVerificationToken') === -1)
+                    options.data += "&__RequestVerificationToken=" + tokenValue;
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="content-wrapper">
+        <div class="content" id="pageContent">
+
+            @RenderBody()
+            <div class="footer-wrapper" id="footerWrapper">
+                <div class="footer">
+                    <span class="footer-left">
+                        &copy; 2018 Company
+                    </span>
+                    <span class="footer-right" id="loadtimetext">
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        MVCxClientGlobalEvents.AddControlsInitializedEventHandler(onControlsInitialized);
+        ASPxClientControl.GetControlCollection().BrowserWindowResized.AddHandler(onBrowserWindowResized);
+    </script>
+    <script>
+        var beforeload = window.performance.timing.navigationStart;
+        function getPageLoadTime() {
+            var afterload = (new Date()).getTime();
+            seconds = (afterload - beforeload) / 1000;
+            $('#loadtimetext').text('Loaded in  ' + seconds + ' sec(s).');
+        }
+        window.onload = getPageLoadTime;
+    </script>
+</body>
+</html>

@@ -166,17 +166,17 @@ body
 .text-content a
 {
     /* DXCOMMENT: Duplicates color from the web.config (devexpress->themes->baseColor) */
-    color: #F87C1D;
+    /*color: #F87C1D;*/
 }
 .text-content a:visited
 {
     /* DXCOMMENT: Duplicates color from the web.config (devexpress->themes->baseColor) */
-    color: #BA5D15; /* 25% black overlay */
+    /*color: #BA5D15;*/ /* 25% black overlay */
 }
 .text-content a:hover
 {
     /* DXCOMMENT: Duplicates color from the web.config (devexpress->themes->baseColor) */
-    color: #FAA96C; /* 35% white overlay */
+    /*color: #FAA96C;*/ /* 35% white overlay */
 }
 
 .text-content b, .text-content strong
@@ -187,7 +187,7 @@ body
 mark
 {
     /* DXCOMMENT: Duplicates color from the web.config (devexpress->themes->baseColor) */
-    background-color: #F87C1D;
+    /*background-color: #F87C1D;*/
     color: #fff;
 }
 
